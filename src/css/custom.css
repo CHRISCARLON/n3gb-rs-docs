@@ -1,0 +1,117 @@
+:root {
+  --ifm-color-primary: #77dd77;
+  --ifm-color-primary-dark: #5cd65c;
+  --ifm-color-primary-darker: #4db84d;
+  --ifm-color-primary-darkest: #3a9a3a;
+  --ifm-color-primary-light: #99e699;
+  --ifm-color-primary-lighter: #aaeeaa;
+  --ifm-color-primary-lightest: #d4f5d4;
+  --ifm-background-color: #ffffff;
+  --ifm-font-color-base: #000000;
+  --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'IBM Plex Mono', monospace;
+  --ifm-heading-font-family: 'IBM Plex Mono', monospace;
+  --ifm-font-size-base: 16px;
+  --ifm-border-radius: 0;
+  --docusaurus-highlighted-code-line-bg: rgba(119, 221, 119, 0.15);
+}
+
+/* Neo-brutalist borders */
+.navbar {
+  border-bottom: 3px solid #000000;
+  box-shadow: none;
+  background-color: #ffffff;
+}
+
+.footer--dark {
+  border-top: 3px solid #000000;
+  background-color: #77dd77;
+  color: #000000;
+}
+
+.footer--dark a {
+  color: #000000;
+}
+
+/* Chunky code blocks */
+pre {
+  border: 2px solid #000000;
+  border-radius: 0 !important;
+  background-color: #f5f5f5 !important;
+}
+
+/* Bold table borders */
+table {
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 2px solid #000000 !important;
+}
+
+table th {
+  background-color: #77dd77;
+  color: #000000;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Links */
+a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.navbar a,
+.footer a {
+  text-decoration: none;
+}
+
+.navbar a:hover,
+.footer a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* Sidebar */
+.menu__link {
+  border-radius: 0;
+  font-weight: 600;
+}
+
+.menu__link--active {
+  background-color: #77dd77;
+  color: #000000 !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --ifm-font-size-base: 14px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre {
+    font-size: 13px;
+  }
+}
