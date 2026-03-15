@@ -11,10 +11,10 @@ const config: Config = {
   },
 
   url: 'https://chriscarlon.github.io',
-  baseUrl: '/n3gb-docs/',
+  baseUrl: '/n3gb-rs-docs/',
 
   organizationName: 'CHRISCARLON',
-  projectName: 'n3gb-docs',
+  projectName: 'n3gb-rs-docs',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 

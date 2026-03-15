@@ -337,7 +337,7 @@ csv_to_hex_csv("input.csv", "output.csv", &config)?;
 
 Output: `hex_id, count` — one row per hex cell with how many input rows fell in it. Useful for heatmaps and spatial aggregation.
 
-![UPRN density map](pathname:///n3gb-docs/uprn_density.png)
+![UPRN density map](pathname:///n3gb-rs-docs/uprn_density.png)
 
 *Base map © Crown Copyright and database rights Ordnance Survey. UPRN data licensed under the Open Government Licence v3.0, contains OS data © Crown Copyright and database rights.*
 

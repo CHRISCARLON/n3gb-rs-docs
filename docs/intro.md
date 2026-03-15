@@ -113,7 +113,7 @@ Cell widths follow the formula: `width(zoom) = (sqrt(7))^(15 - zoom)`
 
 **Simple hex grid over Manchester at zoom level 10**
 
-![Hex grid over Manchester](pathname:///n3gb-docs/manchester-simple-gird.png)
+![Hex grid over Manchester](pathname:///n3gb-rs-docs/manchester-simple-gird.png)
 
 *Base map © Crown Copyright and database rights Ordnance Survey.*
 
@@ -123,6 +123,6 @@ Working on fixing some of the bad geometries that appear.
 
 Hunch is that it's the source data that is wrong for some of them.
 
-![UPRN density map](pathname:///n3gb-docs/uprn_density.png)
+![UPRN density map](pathname:///n3gb-rs-docs/uprn_density.png)
 
 *Base map © Crown Copyright and database rights Ordnance Survey. UPRN data licensed under the Open Government Licence v3.0, contains OS data © Crown Copyright and database rights.*
