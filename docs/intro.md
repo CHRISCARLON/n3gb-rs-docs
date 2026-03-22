@@ -83,6 +83,35 @@ grid.to_geoparquet("output.parquet")?;
 let batch = grid.to_record_batch()?;
 ```
 
+## WGS84 to BNG conversion
+
+Any function that accepts WGS84 coordinates requires a `ConversionMethod` argument. Two backends are available:
+
+| Method | Accuracy | System requirement |
+|--------|----------|--------------------|
+| `ConversionMethod::Ostn15` | ~1mm always | None (data embedded at compile time) |
+| `ConversionMethod::Proj` | ~1mm with grid files, ~5m without | `libproj` system library |
+
+**Stay with `Ostn15` (default) unless you have a specific reason to use PROJ.**
+
+When PROJ grid files (`uk_os_OSTN15_NTv2_OSGBtoETRS.tif`) are not installed, PROJ silently falls back to a Helmert transform with ~5m error — no warning is raised.
+
+To check which pipeline PROJ is actually using at runtime:
+```
+PROJ_DEBUG=2 cargo run
+```
+Look for `uk_os_OSTN15_NTv2_OSGBtoETRS.tif - succeeded` (grid active) or `OSGB 1936 to WGS 84 (6)` (Helmert fallback). The `check_proj` example automates this check.
+
+```rust
+use n3gb_rs::{HexCell, ConversionMethod};
+
+// Recommended
+let cell = HexCell::from_wgs84(&(-2.248, 53.481), 12, ConversionMethod::Ostn15)?;
+
+// Only if you know libproj + grid files are installed
+let cell = HexCell::from_wgs84(&(-2.248, 53.481), 12, ConversionMethod::Proj)?;
+```
+
 ## Zoom levels
 
 Each zoom level has **7x the area** of the next finer level (aperture 7).
@@ -103,7 +132,7 @@ Cell widths follow the formula: `width(zoom) = (sqrt(7))^(15 - zoom)`
 |--------|-------------|
 | `cell` | `HexCell` — single hexagon with ID, center, row/col |
 | `grid` | `HexGrid` — collection of cells covering an extent |
-| `coord` | CRS enum, WGS84 to BNG transformations |
+| `coord` | `Crs` enum, `ConversionMethod` enum, WGS84 to BNG transformations (PROJ + OSTN15) |
 | `geom` | Hexagon polygon creation, WKT/GeoJSON parsing |
 | `index` | Hex ID encoding/decoding, point to row/col math |
 | `dimensions` | Hexagon dimension calculations |

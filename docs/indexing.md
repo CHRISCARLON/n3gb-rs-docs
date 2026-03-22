@@ -95,4 +95,4 @@ The identifier is a URL-safe Base64 string encoding 19 bytes:
 | ID size | 64 bits | 152 bits (19 bytes) |
 | Zoom level | Implicit (number of directions) | Explicit (stored in ID) |
 
-H3 encodes the **path** from a base cell down through the hierarchy. N3gb-rs encodes the **coordinates** directly. This means n3gb-rs has no built-in parent/child relationships — to find a cell's parent at a coarser zoom, you decode the coordinates and recompute.
+H3 encodes the **path** from a base cell down through the hierarchy. N3gb-rs encodes the **coordinates** directly. This means n3gb-rs has no built-in parent/child relationships — to find a cell's parent at another zoom level, you decode the coordinates and recompute.
