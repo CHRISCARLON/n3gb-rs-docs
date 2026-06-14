@@ -155,3 +155,32 @@ Hunch is that it's the source data that is wrong for some of them.
 ![UPRN density map](pathname:///n3gb-rs-docs/uprn_density.png)
 
 *Base map © Crown Copyright and database rights Ordnance Survey. UPRN data licensed under the Open Government Licence v3.0, contains OS data © Crown Copyright and database rights.*
+
+**Cadent open pipeline dataset — each pipe indexed to the hex cells its line passes through**
+
+Using line coverage (`from_line_string_bng` / `from_line_string_wgs84`) at zoom level 11, every pipe feature keeps its original attributes and gains a `hex_ids` list — one entry for a short pipe, several where a longer line crosses multiple cells.
+
+| type | pressure | material | asset_id | hex_ids |
+|------|----------|----------|----------|---------|
+| Service Pipe | LP | PE | CDT1248335481 | `[AQAAAAAfkU50AAAAAArOz-kLDg]` |
+| Service Pipe | LP | PE | CDT1248355939 | `[AQAAAAAeWkV0AAAAAAodZPALuA, AQAAAAAeWqUoAAAAAAoeCrMLNg]` |
+| Main Pipe | LP | PE | CDT1248359381 | `[AQAAAAAf9X7kAAAAAAsqwjYLrw]` |
+| Main Pipe | LP | PE | CDT1248363703 | `[AQAAAAAi9_sIAAAAAAsSzP4LDw]` |
+
+Run over the full open dataset, every feature is tagged in a single pass — input columns straight through, plus the new `hex_ids` list:
+
+```
+=== Gas-pipe infrastructure -> hex ID lists ===
+Input:  gas-pipe-infrastructure-gpi_open.parquet
+Column: geo_shape (WKB (Multi)LineString, WGS84)
+Zoom:   11
+Output: gas-pipes-with-hexids-z11.parquet  (input + `hex_ids`)
+
+Features:          2,268,971
+Cell memberships:  5,559,918
+Avg cells/feature: 2.45
+
+Elapsed: 2.57s (882,893 features/sec)
+```
+
+*Cadent gas pipeline data licensed under the Open Government Licence v3.0.*

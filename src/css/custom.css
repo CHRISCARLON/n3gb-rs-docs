@@ -1,19 +1,30 @@
 :root {
-  --ifm-color-primary: #77dd77;
-  --ifm-color-primary-dark: #5cd65c;
-  --ifm-color-primary-darker: #4db84d;
-  --ifm-color-primary-darkest: #3a9a3a;
-  --ifm-color-primary-light: #99e699;
-  --ifm-color-primary-lighter: #aaeeaa;
-  --ifm-color-primary-lightest: #d4f5d4;
+  --ifm-color-primary: #5f82b8;
+  --ifm-color-primary-dark: #5577ad;
+  --ifm-color-primary-darker: #4f70a4;
+  --ifm-color-primary-darkest: #41608f;
+  --ifm-color-primary-light: #7290c2;
+  --ifm-color-primary-lighter: #809bc8;
+  --ifm-color-primary-lightest: #aec0dd;
   --ifm-background-color: #ffffff;
   --ifm-font-color-base: #000000;
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'IBM Plex Mono', monospace;
   --ifm-heading-font-family: 'IBM Plex Mono', monospace;
-  --ifm-font-size-base: 16px;
+  --ifm-font-size-base: 13px;
+  --ifm-line-height-base: 1.5;
+  /* Heading sizes (Docusaurus uses these, not the base font size) */
+  --ifm-h1-font-size: 1.4rem;
+  --ifm-h2-font-size: 1.2rem;
+  --ifm-h3-font-size: 1.1rem;
+  --ifm-h4-font-size: 1rem;
+  --ifm-h5-font-size: 0.9rem;
+  --ifm-h6-font-size: 0.85rem;
+  --ifm-heading-line-height: 1.2;
   --ifm-border-radius: 0;
-  --docusaurus-highlighted-code-line-bg: rgba(119, 221, 119, 0.15);
+  /* Navy pastel blue accent used for fills (footer, table headers, active menu) */
+  --n3gb-accent: #aec6e8;
+  --docusaurus-highlighted-code-line-bg: rgba(95, 130, 184, 0.15);
 }
 
 /* Neo-brutalist borders */
@@ -25,7 +36,7 @@
 
 .footer--dark {
   border-top: 3px solid #000000;
-  background-color: #77dd77;
+  background-color: var(--n3gb-accent);
   color: #000000;
 }
 
@@ -51,7 +62,7 @@ table td {
 }
 
 table th {
-  background-color: #77dd77;
+  background-color: var(--n3gb-accent);
   color: #000000;
 }
 
@@ -60,6 +71,19 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+}
+
+/* Docusaurus forces the page-title h1 to ~3rem — bring every h1 in line */
+.markdown h1,
+.markdown h1:first-child,
+article h1,
+header h1 {
+  font-size: var(--ifm-h1-font-size);
+}
+
+/* Navbar brand title */
+.navbar__title {
+  font-size: 0.95rem;
 }
 
 /* Links */
@@ -87,22 +111,17 @@ a {
 }
 
 .menu__link--active {
-  background-color: #77dd77;
+  background-color: var(--n3gb-accent);
   color: #000000 !important;
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   :root {
-    --ifm-font-size-base: 14px;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
+    --ifm-font-size-base: 12px;
+    --ifm-h1-font-size: 1.45rem;
+    --ifm-h2-font-size: 1.2rem;
+    --ifm-h3-font-size: 1.05rem;
   }
 
   table {

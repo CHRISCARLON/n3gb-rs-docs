@@ -141,19 +141,41 @@ HexGrid::from_wgs84_multipolygon(&mp, 10, ConversionMethod::Ostn15)?
 
 ---
 
-## CSV Processing
+## Output formats
+
+Cells and grids can be written out three ways:
+
+| Format | What you get | Call |
+|--------|--------------|------|
+| Arrow | In-memory `RecordBatch` / `PointArray` / `PolygonArray` (tagged BNG / EPSG:27700) | `.to_record_batch()`, `.to_arrow_points()`, `.to_arrow_polygons()` |
+| GeoParquet | A `.parquet` file on disk | `.to_geoparquet(path)` |
+| CSV | A hex-indexed `.csv` derived from an input CSV | `csv_to_hex_csv(input, output, &config)` |
+
+Arrow and GeoParquet work on a single `HexCell`, a `Vec<HexCell>`/slice, or a `HexGrid`.
+CSV is a file-to-file pipeline that adds a hex ID column to an existing CSV.
+
+### Arrow & GeoParquet
+
+```rust
+let grid = HexGrid::from_bng_extent(&(457000.0, 339500.0), &(458000.0, 340500.0), 10)?;
+
+let batch = grid.to_record_batch()?;   // Arrow RecordBatch (id, zoom_level, row, col, easting, northing, geometry)
+grid.to_geoparquet("grid.parquet")?;   // write GeoParquet file
+```
+
+### CSV
 
 ```rust
 use n3gb_rs::{csv_to_hex_csv, CsvHexConfig, Crs, ConversionMethod};
+
+// From coordinate columns (BNG)
+let config = CsvHexConfig::from_coords("Easting", "Northing", 12)
+    .crs(Crs::Bng);
 
 // From a geometry column (WGS84)
 let config = CsvHexConfig::new("geometry", 12)
     .crs(Crs::Wgs84)
     .conversion_method(ConversionMethod::Ostn15);
-
-// From coordinate columns (BNG)
-let config = CsvHexConfig::from_coords("Easting", "Northing", 12)
-    .crs(Crs::Bng);
 
 // Density mode — one row per hex cell with count
 let config = CsvHexConfig::from_coords("X", "Y", 6).hex_density();
@@ -161,7 +183,7 @@ let config = CsvHexConfig::from_coords("X", "Y", 6).hex_density();
 csv_to_hex_csv("input.csv", "output.csv", &config)?;
 ```
 
-### Config options
+#### CSV config options
 
 | Method | Description |
 |--------|-------------|
